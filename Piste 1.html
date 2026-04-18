@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivant — App Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-app: #F4F3EE;
+  --bg-card: rgba(255,255,255,0.55);
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9A9A9A;
+  --green-deep: #2D6A4F;
+  --green-mid: #40916C;
+  --green-light: #52B788;
+  --green-pale: #B7E4C7;
+  --green-wash: #D8F3DC;
+  --amber: #E09F3E;
+  --coral: #E76F51;
+  --peach: #F4A261;
+}
+
+body {
+  background: #080808;
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-primary);
+  overflow-x: auto;
+  overflow-y: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.showcase {
+  display: flex;
+  gap: 48px;
+  padding: 60px 80px;
+  align-items: flex-start;
+}
+
+/* ========== APP STORE HEADLINE ========== */
+.screen-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.headline {
+  text-align: center;
+  margin-bottom: 24px;
+  max-width: 340px;
+}
+
+.headline h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.headline p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ========== PHONE FRAME ========== */
+.phone {
+  width: 375px;
+  height: 812px;
+  flex-shrink: 0;
+  background: #1C1C1E;
+  border-radius: 52px;
+  padding: 3px;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255,255,255,0.1),
+    0 50px 100px rgba(0,0,0,0.55),
+    0 0 0 0.5px rgba(0,0,0,0.4);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 49px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-app);
+}
+
+.island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 124px;
+  height: 36px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 50;
+}
+
+.statusbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 30px 6px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  z-index: 40;
+}
+
+.statusbar-r { display: flex; gap: 5px; align-items: center; }
+
+/* ========== LIQUID GLASS TAB BAR ========== */
+.tab-bar {
+  position: absolute;
+  bottom: 16px;
+  left: 14px;
+  right: 14px;
+  height: 54px;
+  background: rgba(255,255,255,0.38);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border-radius: 27px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow:
+    0 1px 20px rgba(0,0,0,0.05),
+    inset 0 0.5px 0 rgba(255,255,255,0.7),
+    inset 0 -0.5px 0 rgba(0,0,0,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 6px;
+  z-index: 30;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 5px 18px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.tab-item.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255,255,255,0.55);
+  box-shadow: 0 0.5px 4px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.9);
+  z-index: -1;
+}
+
+.tab-item svg {
+  width: 21px; height: 21px;
+  stroke-width: 1.6;
+  color: var(--text-tertiary);
+}
+
+.tab-item.active svg { color: var(--green-deep); }
+
+.tab-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.tab-item.active .tab-label {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+/* ========== GLASS ELEMENTS ========== */
+.glass-icon-row {
+  position: absolute;
+  top: 58px; left: 20px; right: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 35;
+}
+
+.glass-icon {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 50%;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0.5px 6px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.7);
+}
+
+.glass-icon svg {
+  width: 16px; height: 16px;
+  color: var(--text-primary);
+  stroke-width: 1.8;
+}
+
+.nav-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 15px;
+  background: rgba(255,255,255,0.38);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0.5px 8px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  margin-bottom: 14px;
+}
+
+.nav-glass svg {
+  width: 15px; height: 15px;
+  color: var(--green-deep);
+}
+
+.content {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 100px 20px 86px;
+  overflow: hidden;
+}
+
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.04);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+/* ========== SCREEN 1: CAPTURE ========== */
+.capture-fullscreen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.capture-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(200,230,200,1) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(255,255,240,0.9) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 70%, rgba(165,214,167,0.8) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(200,230,201,0.7) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(220,237,200,0.9) 0%, transparent 50%),
+    linear-gradient(145deg, #c8e6c9 0%, #e8f5e9 25%, #ffffff 40%, #dcedc8 60%, #a5d6a7 80%, #c8e6c9 100%);
+}
+
+.flower-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.capture-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20px 86px;
+  z-index: 10;
+}
+
+.capture-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 15px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.6);
+  box-shadow: 0 0.5px 8px rgba(0,0,0,0.06), inset 0 0.5px 0 rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+
+.capture-nav svg { width: 15px; height: 15px; color: var(--green-deep); }
+
+.scan-area {
+  width: 280px;
+  height: 200px;
+  position: relative;
+  margin: auto 0;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+
+.scan-corner::before, .scan-corner::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.9);
+  border-radius: 2px;
+  box-shadow: 0 1px 6px rgba(45,106,79,0.15);
+}
+
+.scan-corner.tl { top: 0; left: 0; }
+.scan-corner.tl::before { top: 0; left: 0; width: 32px; height: 3px; }
+.scan-corner.tl::after  { top: 0; left: 0; width: 3px; height: 32px; }
+.scan-corner.tr { top: 0; right: 0; }
+.scan-corner.tr::before { top: 0; right: 0; width: 32px; height: 3px; }
+.scan-corner.tr::after  { top: 0; right: 0; width: 3px; height: 32px; }
+.scan-corner.bl { bottom: 0; left: 0; }
+.scan-corner.bl::before { bottom: 0; left: 0; width: 32px; height: 3px; }
+.scan-corner.bl::after  { bottom: 0; left: 0; width: 3px; height: 32px; }
+.scan-corner.br { bottom: 0; right: 0; }
+.scan-corner.br::before { bottom: 0; right: 0; width: 32px; height: 3px; }
+.scan-corner.br::after  { bottom: 0; right: 0; width: 3px; height: 32px; }
+
+.scan-hint {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(45,106,79,0.65);
+  font-weight: 500;
+  white-space: nowrap;
+  background: rgba(255,255,255,0.55);
+  padding: 4px 12px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.capture-bottom {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shutter-btn {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  border: 3px solid rgba(255,255,255,0.95);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.1),
+    inset 0 2px 4px rgba(255,255,255,1),
+    0 0 0 5px rgba(255,255,255,0.25);
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.shutter-btn::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(45,106,79,0.12);
+}
+
+.or-divider {
+  font-size: 12px;
+  color: rgba(45,106,79,0.45);
+  margin-bottom: 10px;
+}
+
+.recent-card {
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  padding: 4px 16px;
+}
+
+.recent-row {
+  display: flex; align-items: center;
+  gap: 10px; padding: 11px 0;
+}
+
+.recent-row + .recent-row { border-top: 0.5px solid rgba(0,0,0,0.05); }
+
+.r-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.r-dot.g { background: var(--green-light); }
+.r-dot.a { background: var(--amber); }
+.r-dot.c { background: var(--coral); }
+.r-name { flex: 1; font-size: 13px; font-weight: 500; }
+.r-time { font-size: 11px; color: var(--text-tertiary); }
+
+/* ========== SCREEN 2: IDENTIFICATION ========== */
+.plant-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(45,106,79,0.1);
+}
+
+.plant-img-bg {
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(ellipse at 40% 35%, rgba(255,255,250,0.9) 0%, transparent 45%),
+    radial-gradient(ellipse at 65% 55%, rgba(200,230,201,0.8) 0%, transparent 50%),
+    linear-gradient(145deg, #c8e6c9, #a5d6a7, #e8f5e9, #dcedc8);
+}
+
+.plant-img-flowers { position: absolute; inset: 0; overflow: hidden; }
+
+.id-name {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 28px; font-weight: 700;
+  letter-spacing: -0.5px; line-height: 1.1;
+}
+
+.id-row { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+
+.confidence {
+  padding: 3px 9px;
+  background: var(--green-deep);
+  color: white;
+  font-size: 12px; font-weight: 700;
+  border-radius: 9px;
+}
+
+.id-latin {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--green-mid);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.tags-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+
+.tag {
+  padding: 5px 11px; border-radius: 12px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.2px;
+}
+
+.tag.t1 { background: var(--green-wash); color: var(--green-deep); }
+.tag.t2 { background: rgba(224,159,62,0.12); color: #9A6B0C; }
+.tag.t3 { background: rgba(231,111,81,0.1); color: var(--coral); }
+
+.divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 10px;
+}
+
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 0.5px;
+  background: rgba(0,0,0,0.08);
+}
+
+.divider span {
+  font-size: 10px; font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.voice-label {
+  font-size: 11px; font-weight: 500;
+  color: var(--green-mid);
+  font-style: italic; margin-bottom: 5px;
+}
+
+.voice-bubble {
+  background: var(--green-wash);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 12.5px; line-height: 1.55;
+  color: var(--green-deep);
+  font-style: italic;
+  border: 0.5px solid rgba(45,106,79,0.08);
+}
+
+/* ========== SCREEN 3: RÉSEAU ========== */
+.reseau-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.4px; margin-bottom: 3px;
+}
+
+.reseau-stat { display: flex; align-items: baseline; gap: 6px; margin-bottom: 16px; }
+
+.stat-num {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--green-deep);
+}
+
+.stat-label {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+}
+
+.cat-group { margin-bottom: 14px; }
+
+.cat-title {
+  font-size: 12px; font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 7px; padding-bottom: 5px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+
+.species-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.pill {
+  padding: 7px 13px; border-radius: 16px;
+  font-size: 11.5px; font-weight: 600; color: white;
+}
+
+.pill.p1 { background: var(--green-deep); }
+.pill.p2 { background: var(--green-mid); }
+.pill.p3 { background: var(--green-light); }
+.pill.p4 { background: var(--amber); }
+
+.health-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.04);
+  padding: 12px 14px; margin-top: 4px;
+}
+
+.health-row { display: flex; align-items: center; gap: 10px; }
+
+.health-track {
+  flex: 1; height: 7px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 4px; overflow: hidden;
+}
+
+.health-fill {
+  height: 100%; width: 75%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--green-deep), var(--green-light));
+}
+
+.health-pct { font-size: 13px; font-weight: 700; color: var(--green-deep); }
+.health-text { font-size: 11px; color: var(--text-tertiary); margin-top: 5px; }
+
+/* ========== SCREEN 4: ACTIONS ========== */
+.action-heading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.4px; margin-bottom: 2px;
+}
+
+.action-sub {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+}
+
+.action-item {
+  border-radius: 14px; padding: 12px 14px;
+  margin-bottom: 8px; border-left: 3px solid;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 0.5px solid rgba(255,255,255,0.4);
+  border-right: 0.5px solid rgba(255,255,255,0.3);
+  border-bottom: 0.5px solid rgba(255,255,255,0.2);
+}
+
+.action-item.hi { border-left-color: var(--coral); background: rgba(231,111,81,0.04); }
+.action-item.md { border-left-color: var(--amber); background: rgba(224,159,62,0.04); }
+.action-item.lo { border-left-color: var(--green-light); background: rgba(82,183,136,0.04); }
+
+.action-item h4 {
+  font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px; margin-bottom: 2px;
+}
+
+.action-item p {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.action-footer {
+  text-align: center;
+  font-size: 11px; font-weight: 500;
+  color: var(--text-tertiary);
+  margin-top: 14px; padding-top: 12px;
+  border-top: 0.5px solid rgba(0,0,0,0.06);
+  font-style: italic;
+}
+
+/* ========== SCREEN 5: LIEU ========== */
+.lieu-heading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 28px; font-weight: 700;
+  letter-spacing: -0.4px; line-height: 1.1;
+}
+
+.lieu-sub { font-size: 14px; color: var(--text-secondary); margin-top: 1px; }
+
+.lieu-stats {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px; margin: 6px 0 14px;
+}
+
+.changes-label {
+  font-size: 12px; font-weight: 500;
+  color: var(--text-secondary); margin-bottom: 6px;
+}
+
+.change-row {
+  display: flex; align-items: center;
+  gap: 10px; padding: 9px 0;
+}
+
+.change-row + .change-row { border-top: 0.5px solid rgba(0,0,0,0.05); }
+
+.c-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%; flex-shrink: 0;
+}
+
+.c-dot.r { background: var(--coral); }
+.c-dot.g { background: var(--green-light); }
+.c-dot.a { background: var(--amber); }
+
+.c-text { flex: 1; font-size: 12px; line-height: 1.4; }
+
+.c-icon {
+  font-size: 16px; font-weight: 700;
+  width: 22px; text-align: center;
+}
+
+.c-icon.down { color: var(--coral); }
+.c-icon.up { color: var(--green-light); }
+.c-icon.warn { color: var(--amber); }
+
+.alert-box {
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(45,106,79,0.05), rgba(224,159,62,0.07));
+  border-radius: 16px; padding: 12px 14px;
+  border: 0.5px solid rgba(45,106,79,0.1);
+}
+
+.alert-tag {
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--coral); margin-bottom: 5px;
+}
+
+.alert-msg {
+  font-size: 12px; font-style: italic;
+  line-height: 1.5; color: var(--text-secondary);
+}
+
+.ico { fill: none; stroke: currentColor; }
+
+/* STATUS BAR SVGs template */
+.sb svg:first-child { margin-right: 0; }
+</style>
+</head>
+<body>
+
+<div class="showcase">
+
+<!-- ============================== SCREEN 1: CAPTURE ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Pointez. Identifiez.<br>Comprenez le vivant.</h2>
+    <p>Scannez n'importe quelle plante autour de vous</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="statusbar-r">
+        <svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg>
+        <svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg>
+      </div>
+    </div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+    </div>
+
+    <div class="capture-fullscreen">
+      <div class="capture-bg"></div>
+      <div class="flower-layer">
+        <svg viewBox="0 0 375 812" width="375" height="812" style="position:absolute;inset:0;" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.88">
+            <g transform="translate(60,200) rotate(15)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.9)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(140,250) rotate(-10)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.9)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(250,220) rotate(25)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.9)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(310,300) rotate(5)"><ellipse cx="0" cy="-8" rx="3.5" ry="8" fill="rgba(255,255,255,0.87)"/><ellipse cx="7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(72)"/><ellipse cx="4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="2.5" fill="rgba(255,235,150,0.75)"/></g>
+            <g transform="translate(100,350) rotate(-20)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.9)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(200,380) rotate(30)"><ellipse cx="0" cy="-8" rx="3.5" ry="8" fill="rgba(255,255,255,0.87)"/><ellipse cx="7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(72)"/><ellipse cx="4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="2.5" fill="rgba(255,235,150,0.75)"/></g>
+            <g transform="translate(290,400) rotate(-5)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.9)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(50,440) rotate(40)"><ellipse cx="0" cy="-8" rx="3.5" ry="8" fill="rgba(255,255,255,0.87)"/><ellipse cx="7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(72)"/><ellipse cx="4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="2.5" fill="rgba(255,235,150,0.75)"/></g>
+            <g transform="translate(170,160) rotate(12)"><ellipse cx="0" cy="-10" rx="4.5" ry="10" fill="rgba(255,255,255,0.9)"/><ellipse cx="9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3.5" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(320,180) rotate(-18)"><ellipse cx="0" cy="-8" rx="3.5" ry="8" fill="rgba(255,255,255,0.87)"/><ellipse cx="7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(72)"/><ellipse cx="4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="2.5" fill="rgba(255,235,150,0.75)"/></g>
+            <!-- Leaves -->
+            <ellipse cx="80" cy="280" rx="14" ry="5" fill="rgba(80,160,100,0.3)" transform="rotate(-30 80 280)"/>
+            <ellipse cx="180" cy="230" rx="16" ry="4.5" fill="rgba(70,150,90,0.25)" transform="rotate(20 180 230)"/>
+            <ellipse cx="270" cy="350" rx="12" ry="4.5" fill="rgba(85,165,105,0.25)" transform="rotate(-15 270 350)"/>
+            <ellipse cx="330" cy="250" rx="14" ry="4.5" fill="rgba(80,160,100,0.22)" transform="rotate(35 330 250)"/>
+            <ellipse cx="40" cy="370" rx="15" ry="5" fill="rgba(90,170,110,0.25)" transform="rotate(-25 40 370)"/>
+            <ellipse cx="200" cy="180" rx="13" ry="4.5" fill="rgba(75,155,95,0.25)" transform="rotate(10 200 180)"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="capture-overlay">
+        <div class="capture-nav">
+          <svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Capture
+        </div>
+        <div class="scan-area">
+          <div class="scan-corner tl"></div>
+          <div class="scan-corner tr"></div>
+          <div class="scan-corner bl"></div>
+          <div class="scan-corner br"></div>
+          <div class="scan-hint">Cadrez la plante</div>
+        </div>
+        <div class="capture-bottom">
+          <div class="shutter-btn"></div>
+          <div class="or-divider">ou choisissez un lieu récent</div>
+          <div class="recent-card">
+            <div class="recent-row"><div class="r-dot g"></div><div class="r-name">IX Campus — Saint Germain en Laye</div><div class="r-time">hier</div></div>
+            <div class="recent-row"><div class="r-dot a"></div><div class="r-name">Sentier du Vexin</div><div class="r-time">3j</div></div>
+            <div class="recent-row"><div class="r-dot c"></div><div class="r-name">Bords de l'Oise</div><div class="r-time">8j</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="tab-label">Capturer</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="tab-label">Lieux</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 2: IDENTIFICATION ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Reconnaissance<br>instantanée</h2>
+    <p>Nom, propriétés et voix de la plante</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/></svg> Identification</div>
+      <div class="plant-img">
+        <div class="plant-img-bg"></div>
+        <div class="plant-img-flowers">
+          <svg viewBox="0 0 335 210" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9">
+            <g transform="translate(80,70) rotate(10)"><ellipse cx="0" cy="-10" rx="4.5" ry="10" fill="rgba(255,255,255,0.9)"/><ellipse cx="9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3.5" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(170,50) rotate(-15)"><ellipse cx="0" cy="-10" rx="4.5" ry="10" fill="rgba(255,255,255,0.9)"/><ellipse cx="9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.87)" transform="rotate(72)"/><ellipse cx="5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.84)" transform="rotate(144)"/><ellipse cx="-5.9" cy="8.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.86)" transform="rotate(216)"/><ellipse cx="-9.5" cy="-3.1" rx="4.5" ry="10" fill="rgba(255,255,255,0.88)" transform="rotate(288)"/><circle cx="0" cy="0" r="3.5" fill="rgba(255,235,150,0.8)"/></g>
+            <g transform="translate(260,90) rotate(20)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.88)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.85)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.75)"/></g>
+            <g transform="translate(50,140) rotate(35)"><ellipse cx="0" cy="-8" rx="3.5" ry="8" fill="rgba(255,255,255,0.85)"/><ellipse cx="7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(72)"/><ellipse cx="4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.8)" transform="rotate(144)"/><ellipse cx="-4.7" cy="6.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.82)" transform="rotate(216)"/><ellipse cx="-7.6" cy="-2.5" rx="3.5" ry="8" fill="rgba(255,255,255,0.84)" transform="rotate(288)"/><circle cx="0" cy="0" r="2.5" fill="rgba(255,235,150,0.75)"/></g>
+            <g transform="translate(200,160) rotate(-8)"><ellipse cx="0" cy="-9" rx="4" ry="9" fill="rgba(255,255,255,0.88)"/><ellipse cx="8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.85)" transform="rotate(72)"/><ellipse cx="5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.82)" transform="rotate(144)"/><ellipse cx="-5.3" cy="7.3" rx="4" ry="9" fill="rgba(255,255,255,0.84)" transform="rotate(216)"/><ellipse cx="-8.5" cy="-2.8" rx="4" ry="9" fill="rgba(255,255,255,0.86)" transform="rotate(288)"/><circle cx="0" cy="0" r="3" fill="rgba(255,235,150,0.8)"/></g>
+            <ellipse cx="120" cy="100" rx="16" ry="5" fill="rgba(80,160,100,0.3)" transform="rotate(-25 120 100)"/>
+            <ellipse cx="220" cy="130" rx="14" ry="4.5" fill="rgba(90,170,110,0.28)" transform="rotate(15 220 130)"/>
+          </g></svg>
+        </div>
+      </div>
+      <div class="id-row"><span class="id-name">Jasmin officinal</span><span class="confidence">95 %</span></div>
+      <div class="id-latin">Jasminum officinale</div>
+      <div class="tags-row"><span class="tag t1">Parfumée · Non-Toxique</span><span class="tag t2">Mellifère</span><span class="tag t3">Ornementale</span></div>
+      <div class="divider"><span>Ce qu'elle ressent</span></div>
+      <div class="voice-label">Voix de la plante :</div>
+      <div class="voice-bubble">« Le soleil doux me fait du bien. J'étire mes lianes pour chercher de nouveaux supports où m'enrouler. »</div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="tab-label">Capturer</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="tab-label">Lieux</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 3: RÉSEAU ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Explorez le réseau<br>du vivant autour de vous</h2>
+    <p>Pollinisateurs, champignons, chaîne alimentaire</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="7" y2="7"/><line x1="12" y1="14" x2="17" y2="17"/></svg> Réseau du Vivant</div>
+      <div class="reseau-title">Ses liens</div>
+      <div class="reseau-stat"><span class="stat-num">5</span><span class="stat-label">espèces dépendent d'elle ici</span></div>
+      <div class="cat-group"><div class="cat-title">Pollinisateurs</div><div class="species-pills"><span class="pill p1">Sphinx du troène</span><span class="pill p2">Moro-sphinx</span></div></div>
+      <div class="cat-group"><div class="cat-title">Champignons associés</div><div class="species-pills"><span class="pill p3">Mycorrhize AMF</span><span class="pill p4">Levures de nectar</span></div></div>
+      <div class="cat-group"><div class="cat-title">Elle nourrit</div><div class="species-pills"><span class="pill p1">Chenille de Sphinx</span><span class="pill p2">Puceron vert</span></div></div>
+      <div class="health-card"><div class="health-row"><div class="health-track"><div class="health-fill"></div></div><span class="health-pct">75 %</span></div><div class="health-text">Santé du micro-écosystème</div></div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="tab-label">Capturer</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="tab-label">Lieux</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 4: ACTION ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Agissez au bon moment,<br>au bon endroit</h2>
+    <p>Des gestes concrets classés par urgence</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Action</div>
+      <div class="action-heading">Que faire ici ?</div>
+      <div class="action-sub">Suggestions par urgence écologique</div>
+      <div class="action-item hi"><h4>Observer à la tombée de la nuit</h4><p>Pic d'activité des papillons pollinisateurs — priorité haute</p></div>
+      <div class="action-item md"><h4>Préserver les fleurs ouvertes</h4><p>Ne pas couper, source de nectar cruciale en ce moment</p></div>
+      <div class="action-item lo"><h4>Photographier dans 1 mois</h4><p>Suivi de l'apparition des baies (les petits fruits du jasmin)</p></div>
+      <div class="action-footer">Observer sans agir est toujours une option valide.</div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="tab-label">Capturer</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="tab-label">Lieux</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 5: LIEU ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Chaque lieu a<br>sa propre mémoire</h2>
+    <p>Alertes, historique et santé écologique</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Mémoire du lieu</div>
+      <div class="lieu-heading">IXCampus</div>
+      <div class="lieu-sub">(Saint-Germain-en-Laye)</div>
+      <div class="lieu-stats">24 visites · 56 espèces détectées</div>
+      <div class="card">
+        <div class="changes-label">Changements récents</div>
+        <div class="change-row"><div class="c-dot r"></div><div class="c-text">Renouée du Japon signalée près du parking</div><div class="c-icon down">↓</div></div>
+        <div class="change-row"><div class="c-dot g"></div><div class="c-text">Jasmin officinal : pic olfactif prévu vers 19h</div><div class="c-icon up">+</div></div>
+        <div class="change-row"><div class="c-dot a"></div><div class="c-text">Température du sol idéale pour la micro-faune</div><div class="c-icon warn">!</div></div>
+      </div>
+      <div class="alert-box"><div class="alert-tag">Alerte du lieu</div><div class="alert-msg">« Les treillages près du bâtiment fablab sont trop exposés au vent. Le jeune jasmin a besoin d'aide pour s'accrocher et éviter que ses lianes ne se brisent. »</div></div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="tab-label">Capturer</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="tab-label">Lieux</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

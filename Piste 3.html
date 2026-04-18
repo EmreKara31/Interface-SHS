@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Enquête du Vivant — iOS 26 concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-app:#F6F4EF;
+  --card:rgba(255,255,255,.56);
+  --text:#171717;
+  --sub:#6f6f6f;
+  --muted:#979797;
+  --green:#2D6A4F;
+  --green2:#40916C;
+  --green3:#74C69D;
+  --green4:#D8F3DC;
+  --amber:#E8A33D;
+  --coral:#E76F51;
+  --sky:#CFE8E3;
+  --shadow:0 18px 44px rgba(0,0,0,.08);
+}
+body{
+  background:#080808;
+  font-family:-apple-system,BlinkMacSystemFont,'DM Sans',system-ui,sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  overflow:auto;
+}
+.showcase{display:flex;gap:48px;padding:60px 80px;align-items:flex-start}
+.screen-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.headline{text-align:center;max-width:340px;margin-bottom:22px;min-height:108px;display:flex;flex-direction:column;justify-content:flex-end}
+.headline h2{
+  font-family:'Source Serif 4',Georgia,serif;
+  color:#fff;font-size:26px;line-height:1.18;font-weight:700;letter-spacing:-.5px;margin-bottom:6px
+}
+.headline p{color:rgba(255,255,255,.48);font-size:14px;line-height:1.4}
+.phone{
+  width:375px;height:812px;background:#1C1C1E;border-radius:52px;padding:3px;position:relative;flex-shrink:0;
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1),0 50px 100px rgba(0,0,0,.55),0 0 0 .5px rgba(0,0,0,.4)
+}
+.phone-screen{width:100%;height:100%;border-radius:49px;overflow:hidden;position:relative;background:var(--bg-app)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;background:#000;border-radius:20px;z-index:50}
+.statusbar{position:absolute;top:0;left:0;right:0;height:54px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 30px 6px;font-size:15px;font-weight:600;z-index:45}
+.statusbar-r{display:flex;gap:5px;align-items:center}
+.content{position:absolute;inset:0;padding:100px 20px 86px;overflow:hidden}
+.tab-bar{
+  position:absolute;left:14px;right:14px;bottom:16px;height:54px;display:flex;align-items:center;justify-content:space-around;padding:0 6px;
+  background:rgba(255,255,255,.38);backdrop-filter:blur(50px) saturate(200%);-webkit-backdrop-filter:blur(50px) saturate(200%);
+  border-radius:27px;border:.5px solid rgba(255,255,255,.5);box-shadow:0 1px 20px rgba(0,0,0,.05), inset 0 .5px 0 rgba(255,255,255,.75);z-index:30
+}
+.tab-item{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 18px;border-radius:16px;position:relative}
+.tab-item.active::before{
+  content:'';position:absolute;inset:0;border-radius:16px;background:rgba(255,255,255,.42);backdrop-filter:blur(12px);
+  border:.5px solid rgba(255,255,255,.55);box-shadow:inset 0 .5px 0 rgba(255,255,255,.9);z-index:-1
+}
+.tab-item svg{width:21px;height:21px;stroke-width:1.6;color:var(--muted)}
+.tab-item.active svg,.tab-item.active .tab-label{color:var(--green)}
+.tab-label{font-size:10px;font-weight:600;color:var(--muted)}
+.glass-icon-row{position:absolute;top:58px;left:20px;right:20px;display:flex;justify-content:space-between;z-index:35}
+.glass-icon,.glass-pill,.nav-glass{
+  background:rgba(255,255,255,.36);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:.5px solid rgba(255,255,255,.58);box-shadow:0 .5px 8px rgba(0,0,0,.05),inset 0 .5px 0 rgba(255,255,255,.75)
+}
+.glass-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.glass-icon svg{width:16px;height:16px;stroke-width:1.8;color:var(--text)}
+.nav-glass{display:inline-flex;gap:7px;align-items:center;padding:6px 14px;border-radius:18px;font-size:14px;font-weight:600;margin-bottom:14px}
+.nav-glass svg{width:15px;height:15px;color:var(--green)}
+.card{background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:18px;border:.5px solid rgba(255,255,255,.55);box-shadow:var(--shadow);padding:14px 16px;margin-bottom:10px}
+.title{font-family:'Source Serif 4',Georgia,serif;font-size:30px;line-height:1.05;font-weight:700;letter-spacing:-.7px;margin-bottom:8px}
+.subtitle{font-size:13px;color:var(--sub);line-height:1.45}
+.mono{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.label{font-size:11px;color:var(--green2);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.badge{display:inline-flex;padding:5px 10px;border-radius:12px;background:var(--green4);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.2px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.progress{height:7px;background:rgba(0,0,0,.06);border-radius:999px;overflow:hidden;margin-top:10px}
+.progress > div{height:100%;background:linear-gradient(90deg,var(--green2),var(--green3));border-radius:999px}
+.btn{
+  border:0;border-radius:16px;padding:14px 16px;font-weight:700;font-size:14px;cursor:default;
+  background:linear-gradient(180deg,#3F8C67,#2D6A4F);color:#fff;box-shadow:0 10px 20px rgba(45,106,79,.18)
+}
+.btn.secondary{background:rgba(255,255,255,.78);color:var(--green);box-shadow:none;border:.5px solid rgba(0,0,0,.06)}
+.small{font-size:12px;color:var(--sub);line-height:1.45}
+/* Screen 1 */
+.capture-bg{position:absolute;inset:0;background:
+radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 10%, transparent 32%),
+radial-gradient(circle at 80% 30%, rgba(216,243,220,.9) 0 12%, transparent 30%),
+linear-gradient(145deg,#dff2df,#cbe9cc 30%, #f2f7ec 60%, #cae7cf 100%);
+}
+.leaf{position:absolute;border-radius:50% 0 50% 50%;background:rgba(95,160,115,.35);transform:rotate(35deg)}
+.blade{position:absolute;width:80px;height:2px;background:rgba(95,160,115,.22);border-radius:2px;transform-origin:left center}
+.scan-area{width:286px;height:220px;position:relative;margin:90px auto 0}
+.scan-corner{position:absolute;width:34px;height:34px}
+.scan-corner:before,.scan-corner:after{content:'';position:absolute;background:rgba(255,255,255,.95);border-radius:2px;box-shadow:0 1px 6px rgba(45,106,79,.14)}
+.scan-corner.tl{top:0;left:0}.scan-corner.tl:before{top:0;left:0;width:34px;height:3px}.scan-corner.tl:after{top:0;left:0;width:3px;height:34px}
+.scan-corner.tr{top:0;right:0}.scan-corner.tr:before{top:0;right:0;width:34px;height:3px}.scan-corner.tr:after{top:0;right:0;width:3px;height:34px}
+.scan-corner.bl{bottom:0;left:0}.scan-corner.bl:before{bottom:0;left:0;width:34px;height:3px}.scan-corner.bl:after{bottom:0;left:0;width:3px;height:34px}
+.scan-corner.br{bottom:0;right:0}.scan-corner.br:before{bottom:0;right:0;width:34px;height:3px}.scan-corner.br:after{bottom:0;right:0;width:3px;height:34px}
+.scan-hint{position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);padding:4px 12px;border-radius:10px;background:rgba(255,255,255,.58);font-size:12px;color:rgba(45,106,79,.7)}
+.shutter{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.92);border:3px solid rgba(255,255,255,.98);box-shadow:0 4px 24px rgba(0,0,0,.1),0 0 0 5px rgba(255,255,255,.24);margin:16px auto 12px;position:relative}
+.shutter:after{content:'';position:absolute;inset:5px;border-radius:50%;border:1.5px solid rgba(45,106,79,.14)}
+.hint-card{position:absolute;left:20px;right:20px;bottom:94px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.52);backdrop-filter:blur(28px);border:.5px solid rgba(255,255,255,.6)}
+.list-row{display:flex;align-items:center;gap:10px;padding:10px 0}.list-row+.list-row{border-top:.5px solid rgba(0,0,0,.05)}
+.dot{width:8px;height:8px;border-radius:50%}.d1{background:var(--green3)}.d2{background:var(--amber)}.d3{background:var(--coral)}
+/* Screen 2 */
+.question-hero{height:210px;border-radius:20px;position:relative;overflow:hidden;margin-bottom:16px;background:linear-gradient(150deg,#d4f0d3,#eef7eb 45%,#cfe7d2)}
+.question-hero .shape{position:absolute;inset:auto;width:86px;height:48px;border-radius:60% 10% 60% 10%;background:rgba(95,160,115,.35);transform:rotate(-18deg)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.choice{padding:14px;border-radius:16px;background:rgba(255,255,255,.78);border:.5px solid rgba(0,0,0,.06);min-height:76px}
+.choice.active{background:linear-gradient(180deg,#E6F5EA,#D8F3DC);border-color:rgba(45,106,79,.15)}
+.choice strong{display:block;font-size:14px;margin-bottom:4px}.choice span{font-size:12px;color:var(--sub);line-height:1.35}
+/* Screen 3 */
+.fabric{height:176px;border-radius:18px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), transparent 28%),repeating-linear-gradient(135deg, rgba(95,160,115,.18) 0 6px, rgba(95,160,115,.32) 6px 12px);position:relative;overflow:hidden;margin-bottom:14px}
+.fabric::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(255,255,255,.12))}
+.scale-row{display:flex;gap:10px;margin-top:12px}.scale-chip{flex:1;padding:12px;border-radius:14px;background:#fff;border:.5px solid rgba(0,0,0,.06);text-align:center}.scale-chip b{display:block;font-size:16px}
+.env-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.env{padding:12px;border-radius:16px;background:#fff;border:.5px solid rgba(0,0,0,.06)}
+/* Screen 4 */
+.candidate{padding:12px;border-radius:18px;background:#fff;border:.5px solid rgba(0,0,0,.06);display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.thumb{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,#D8F3DC,#B7E4C7);position:relative;overflow:hidden;flex-shrink:0}
+.thumb .mini{position:absolute;width:38px;height:18px;border-radius:60% 10% 60% 10%;background:rgba(95,160,115,.5);left:17px;top:26px;transform:rotate(-20deg)}
+.score{margin-left:auto;padding:5px 9px;border-radius:12px;background:var(--green4);color:var(--green);font-size:11px;font-weight:700}
+.reason{font-size:11px;color:var(--sub);line-height:1.4;margin-top:6px}
+/* Screen 5 */
+.journal-hero{padding:16px;border-radius:20px;background:linear-gradient(135deg,#EAF7EE,#D8F3DC);margin-bottom:14px;border:.5px solid rgba(45,106,79,.08)}
+.quote{font-family:'Source Serif 4',Georgia,serif;font-size:18px;line-height:1.35;color:var(--green);margin-top:8px}
+.timeline{margin-top:12px}.timeline .step{display:flex;gap:12px;padding:10px 0}.timeline .step+.step{border-top:.5px solid rgba(0,0,0,.05)}
+.num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--green4);font-size:12px;font-weight:700;color:var(--green);flex-shrink:0}
+.footer-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+svg{display:block}
+</style>
+</head>
+<body>
+<div class="showcase">
+
+  <section class="screen-wrap">
+    <div class="headline">
+      <h2>Cadrez le vivant, sans réponse immédiate</h2>
+      <p>Le premier geste ouvre une enquête située, pas un scan magique.</p>
+    </div>
+    <div class="phone"><div class="phone-screen">
+      <div class="island"></div>
+      <div class="statusbar"><span>9:41</span><div class="statusbar-r"><span>◐◐◐</span><span>◜◝</span><span>▱</span></div></div>
+      <div class="capture-bg"></div>
+      <div class="leaf" style="left:40px;top:200px;width:22px;height:40px"></div>
+      <div class="leaf" style="left:120px;top:160px;width:18px;height:34px;transform:rotate(18deg)"></div>
+      <div class="leaf" style="left:250px;top:250px;width:28px;height:52px;transform:rotate(-10deg)"></div>
+      <div class="leaf" style="left:180px;top:360px;width:20px;height:38px;transform:rotate(25deg)"></div>
+      <div class="leaf" style="left:80px;top:470px;width:26px;height:46px;transform:rotate(-30deg)"></div>
+      <div class="blade" style="left:30px;top:215px;transform:rotate(12deg)"></div>
+      <div class="blade" style="left:210px;top:270px;transform:rotate(-8deg)"></div>
+      <div class="glass-icon-row">
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor"/><path d="M19 21a7 7 0 1 0-14 0" stroke="currentColor"/></svg></div>
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 8.5V4m0 16v-4.5m7.5-3.5H20m-16 0h.5m12.803 5.303.354.354M6.343 6.343l.354.354m10.606-0.354-.354.354M6.697 17.303l-.354.354" stroke="currentColor" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="content" style="padding-top:92px;">
+        <div class="nav-glass"><svg fill="none" viewBox="0 0 24 24"><path d="M4 19h16M6 17l6-12 6 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg> Enquête vivante</div>
+        <div class="scan-area">
+          <div class="scan-corner tl"></div><div class="scan-corner tr"></div><div class="scan-corner bl"></div><div class="scan-corner br"></div>
+          <div class="scan-hint">Cadrez une feuille + son contexte</div>
+        </div>
+        <div class="hint-card">
+          <div class="small" style="margin-bottom:6px;font-weight:700;color:var(--green)">Ce que l’app cherche</div>
+          <div class="small">Forme générale, texture, lumière, humidité, plantes voisines. Vous pouvez aussi partir d’un lieu déjà observé.</div>
+          <div class="list-row"><span class="dot d1"></span><div class="small" style="flex:1">Bois de Vincennes — bord d’étang</div><span class="small">hier</span></div>
+          <div class="list-row"><span class="dot d2"></span><div class="small" style="flex:1">Jardin des Plantes — allée ombragée</div><span class="small">3 j</span></div>
+        </div>
+        <div style="margin-top:auto;text-align:center">
+          <div class="shutter"></div>
+          <div class="small">ou commencez par un lieu récent</div>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item active"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7h16M7 4v6m10-6v6M5 10h14l-1 9H6l-1-9Z" stroke="currentColor"/><path d="M9.5 14.5h5" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Observer</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="currentColor"/><path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor"/></svg><div class="tab-label">Lieux</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M4 17s2-4 8-4 8-4 8-4" stroke="currentColor" stroke-linecap="round"/><path d="M6 10c1 0 2-.8 2-2s-1-2-2-2-2 .8-2 2 1 2 2 2Zm12 8c1 0 2-.8 2-2s-1-2-2-2-2 .8-2 2 1 2 2 2Z" stroke="currentColor"/></svg><div class="tab-label">Indices</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="screen-wrap">
+    <div class="headline">
+      <h2>Une enquête par indices croisés</h2>
+      <p>Formes, couleurs, textures, milieu et saison font émerger plusieurs hypothèses.</p>
+    </div>
+    <div class="phone"><div class="phone-screen">
+      <div class="island"></div>
+      <div class="statusbar"><span>9:41</span><div class="statusbar-r"><span>◐◐◐</span><span>◜◝</span><span>▱</span></div></div>
+      <div class="glass-icon-row">
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M6 12h12M12 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="content">
+        <div class="nav-glass"><svg fill="none" viewBox="0 0 24 24"><path d="M7 4h10M12 4v16M7 20h10" stroke="currentColor"/><path d="M6 8c2.5 2 9.5 2 12 0" stroke="currentColor"/></svg> Étape 1 · Morphologie</div>
+        <div class="question-hero">
+          <div class="shape" style="left:48px;top:64px"></div>
+          <div class="shape" style="left:146px;top:94px;width:92px;height:44px;transform:rotate(8deg)"></div>
+          <div class="shape" style="left:238px;top:48px;width:70px;height:38px;transform:rotate(-34deg)"></div>
+        </div>
+        <div class="mono">Question actuelle</div>
+        <div class="title" style="font-size:26px">À quoi ressemblent les feuilles ?</div>
+        <div class="subtitle">Choisissez l’indice le plus proche. Vous pourrez revenir en arrière si le doute persiste.</div>
+        <div class="choice-grid">
+          <div class="choice active"><strong>Lancéolées</strong><span>Longues, étroites, pointues aux extrémités</span></div>
+          <div class="choice"><strong>Ovales</strong><span>Plus larges, contours arrondis</span></div>
+          <div class="choice"><strong>Dentelées</strong><span>Bord irrégulier ou légèrement scie</span></div>
+          <div class="choice"><strong>Composées</strong><span>Plusieurs folioles sur une même tige</span></div>
+        </div>
+        <div class="progress"><div style="width:36%"></div></div>
+        <div class="row" style="justify-content:space-between;margin-top:14px">
+          <button class="btn secondary">Je ne sais pas</button>
+          <button class="btn">Continuer</button>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7h16M7 4v6m10-6v6M5 10h14l-1 9H6l-1-9Z" stroke="currentColor"/><path d="M9.5 14.5h5" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Observer</div></div>
+        <div class="tab-item active"><svg fill="none" viewBox="0 0 24 24"><path d="M7 4h10M12 4v16M7 20h10" stroke="currentColor"/><path d="M6 8c2.5 2 9.5 2 12 0" stroke="currentColor"/></svg><div class="tab-label">Indices</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="currentColor"/><path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor"/></svg><div class="tab-label">Lieux</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="screen-wrap">
+    <div class="headline">
+      <h2>Le milieu devient une preuve</h2>
+      <p>Humidité, lumière et texture font partie de l’identification.</p>
+    </div>
+    <div class="phone"><div class="phone-screen">
+      <div class="island"></div>
+      <div class="statusbar"><span>9:41</span><div class="statusbar-r"><span>◐◐◐</span><span>◜◝</span><span>▱</span></div></div>
+      <div class="glass-icon-row">
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M12 8v8m-4-4h8" stroke="currentColor" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="content">
+        <div class="nav-glass"><svg fill="none" viewBox="0 0 24 24"><path d="M3 17c4-6 14-6 18 0" stroke="currentColor"/><path d="M6 13c2-3 10-3 12 0" stroke="currentColor"/><path d="M12 18.5h.01" stroke="currentColor" stroke-linecap="round"/></svg> Étape 2 · Texture & milieu</div>
+        <div class="fabric"></div>
+        <div class="label">Texture perçue</div>
+        <div class="title" style="font-size:25px">Surface lisse, nervures souples</div>
+        <div class="subtitle">Comparez votre plante à la description. Plus vous ajoutez de contexte, plus l’enquête gagne en finesse.</div>
+        <div class="scale-row">
+          <div class="scale-chip"><b>Ombre</b><span class="small">majoritaire</span></div>
+          <div class="scale-chip"><b>Humide</b><span class="small">sol frais</span></div>
+          <div class="scale-chip"><b>Mai</b><span class="small">floraison</span></div>
+        </div>
+        <div class="env-grid">
+          <div class="env"><div class="small" style="font-weight:700;color:var(--green)">Autour de vous</div><div class="small">mousses, mur clair, deux graminées, passage d’abeilles</div></div>
+          <div class="env"><div class="small" style="font-weight:700;color:var(--green)">Indice fort</div><div class="small">le jasmin préfère un support pour grimper et un abri du vent</div></div>
+        </div>
+        <div class="progress"><div style="width:68%"></div></div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7h16M7 4v6m10-6v6M5 10h14l-1 9H6l-1-9Z" stroke="currentColor"/><path d="M9.5 14.5h5" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Observer</div></div>
+        <div class="tab-item active"><svg fill="none" viewBox="0 0 24 24"><path d="M7 4h10M12 4v16M7 20h10" stroke="currentColor"/><path d="M6 8c2.5 2 9.5 2 12 0" stroke="currentColor"/></svg><div class="tab-label">Indices</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M5 18h14M7 14c2-2 8-2 10 0M8 10c1.5-1 6.5-1 8 0" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Comparer</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="screen-wrap">
+    <div class="headline">
+      <h2>Le doute reste visible</h2>
+      <p>Trois hypothèses, des raisons comparées, une décision à prendre.</p>
+    </div>
+    <div class="phone"><div class="phone-screen">
+      <div class="island"></div>
+      <div class="statusbar"><span>9:41</span><div class="statusbar-r"><span>◐◐◐</span><span>◜◝</span><span>▱</span></div></div>
+      <div class="glass-icon-row">
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M6 12h12M12 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="content">
+        <div class="nav-glass"><svg fill="none" viewBox="0 0 24 24"><path d="M5 19c7-2 9-12 14-14" stroke="currentColor"/><path d="m12 7 7-2-2 7" stroke="currentColor" stroke-linejoin="round"/></svg> Étape 3 · Hypothèses</div>
+        <div class="title" style="font-size:27px">Vos meilleures pistes</div>
+        <div class="subtitle" style="margin-bottom:14px">Aucune réponse n’est imposée. L’app vous aide à comparer ce qui correspond vraiment à votre observation.</div>
+        <div class="candidate">
+          <div class="thumb"><div class="mini"></div></div>
+          <div style="flex:1">
+            <div class="row"><strong>Jasmin officinal</strong><span class="score">94%</span></div>
+            <div class="small" style="margin-top:4px">Fleurs blanches, feuilles opposées, support grimpant, parfum du soir.</div>
+            <div class="reason">Correspond aux feuilles lancées, au milieu mi-ombragé et à la période de floraison observée.</div>
+          </div>
+        </div>
+        <div class="candidate">
+          <div class="thumb" style="background:linear-gradient(135deg,#F7E7D5,#EFDCC3)"><div class="mini" style="transform:rotate(10deg);background:rgba(191,147,94,.45)"></div></div>
+          <div style="flex:1">
+            <div class="row"><strong>Chèvrefeuille</strong><span class="score" style="background:rgba(232,163,61,.18);color:#A36C0C">61%</span></div>
+            <div class="small" style="margin-top:4px">Feuillage voisin, port grimpant possible, mais texture moins cohérente.</div>
+            <div class="reason">Hypothèse plausible si les fleurs sont tubulaires. Vérifiez la disposition des feuilles.</div>
+          </div>
+        </div>
+        <div class="candidate">
+          <div class="thumb" style="background:linear-gradient(135deg,#EAE7F8,#D9D4F3)"><div class="mini" style="transform:rotate(-28deg);background:rgba(113,104,178,.38)"></div></div>
+          <div style="flex:1">
+            <div class="row"><strong>Faux jasmin</strong><span class="score" style="background:rgba(231,111,81,.12);color:var(--coral)">38%</span></div>
+            <div class="small" style="margin-top:4px">Aspect proche, mais milieu trop humide selon vos observations.</div>
+            <div class="reason">À garder seulement si le feuillage est plus coriace et brillant que prévu.</div>
+          </div>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:10px"><button class="btn secondary">Comparer encore</button><button class="btn">Choisir la piste 1</button></div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7h16M7 4v6m10-6v6M5 10h14l-1 9H6l-1-9Z" stroke="currentColor"/><path d="M9.5 14.5h5" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Observer</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M7 4h10M12 4v16M7 20h10" stroke="currentColor"/><path d="M6 8c2.5 2 9.5 2 12 0" stroke="currentColor"/></svg><div class="tab-label">Indices</div></div>
+        <div class="tab-item active"><svg fill="none" viewBox="0 0 24 24"><path d="M5 18h14M7 14c2-2 8-2 10 0M8 10c1.5-1 6.5-1 8 0" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Comparer</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="screen-wrap">
+    <div class="headline">
+      <h2>Comprendre avant de nommer</h2>
+      <p>Le résultat devient un carnet d’interprétation, pas juste une fiche.</p>
+    </div>
+    <div class="phone"><div class="phone-screen">
+      <div class="island"></div>
+      <div class="statusbar"><span>9:41</span><div class="statusbar-r"><span>◐◐◐</span><span>◜◝</span><span>▱</span></div></div>
+      <div class="glass-icon-row">
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="glass-icon"><svg fill="none" viewBox="0 0 24 24"><path d="M8 5h8l3 3v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor"/><path d="M8 5v4h8" stroke="currentColor"/></svg></div>
+      </div>
+      <div class="content">
+        <div class="nav-glass"><svg fill="none" viewBox="0 0 24 24"><path d="M4 19h16M7 15c1-4 9-4 10 0" stroke="currentColor"/><path d="M9 11c0-2 1.5-4 3-4s3 2 3 4" stroke="currentColor"/></svg> Carnet d’interprétation</div>
+        <div class="journal-hero">
+          <div class="row" style="justify-content:space-between;align-items:flex-start">
+            <div>
+              <div class="mono" style="margin-bottom:6px">Conclusion la plus probable</div>
+              <div class="title" style="font-size:28px;margin-bottom:0">Jasmin officinal</div>
+              <div class="small" style="margin-top:6px;color:var(--green2)">Confiance finale : 94% · résultat confirmé par vos choix</div>
+            </div>
+            <span class="badge">Hypothèse retenue</span>
+          </div>
+          <div class="quote">« Vous l’avez reconnu en observant sa forme, sa texture et le milieu qui l’entoure. »</div>
+        </div>
+        <div class="card" style="margin-bottom:8px">
+          <div class="label">Ce qui a compté</div>
+          <div class="timeline">
+            <div class="step"><div class="num">1</div><div class="small"><strong>Forme</strong> — feuilles lancéolées et disposition opposée.</div></div>
+            <div class="step"><div class="num">2</div><div class="small"><strong>Texture</strong> — surface souple, non coriace.</div></div>
+            <div class="step"><div class="num">3</div><div class="small"><strong>Milieu</strong> — ombre légère, mur support, humidité modérée.</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">Et maintenant ?</div>
+          <div class="small" style="margin-top:6px">Retournez sur ce lieu au crépuscule pour vérifier le parfum. Photographiez la floraison complète dans deux semaines pour affiner la mémoire du lieu.</div>
+        </div>
+        <div class="footer-note">Ici, le vivant reste une hypothèse située avant d’être un simple nom.</div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7h16M7 4v6m10-6v6M5 10h14l-1 9H6l-1-9Z" stroke="currentColor"/><path d="M9.5 14.5h5" stroke="currentColor" stroke-linecap="round"/></svg><div class="tab-label">Observer</div></div>
+        <div class="tab-item"><svg fill="none" viewBox="0 0 24 24"><path d="M7 4h10M12 4v16M7 20h10" stroke="currentColor"/><path d="M6 8c2.5 2 9.5 2 12 0" stroke="currentColor"/></svg><div class="tab-label">Indices</div></div>
+        <div class="tab-item active"><svg fill="none" viewBox="0 0 24 24"><path d="M8 5h8l3 3v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor"/><path d="M8 5v4h8" stroke="currentColor"/></svg><div class="tab-label">Carnet</div></div>
+      </div>
+    </div></div>
+  </section>
+
+</div>
+</body>
+</html>

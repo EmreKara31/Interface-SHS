@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symbiose — App Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-app: #F4F3EE;
+  --bg-card: rgba(255,255,255,0.55);
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9A9A9A;
+  --green-deep: #1B4332;
+  --green-dark: #2D6A4F;
+  --green-mid: #40916C;
+  --green-light: #52B788;
+  --green-pale: #B7E4C7;
+  --green-wash: #D8F3DC;
+  --teal: #2EC4B6;
+  --amber: #E09F3E;
+  --coral: #E76F51;
+  --earth: #8B6F47;
+  --sky: #5B9BD5;
+}
+
+body {
+  background: #060806;
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-primary);
+  overflow-x: auto;
+  overflow-y: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.showcase {
+  display: flex;
+  gap: 48px;
+  padding: 60px 80px;
+  align-items: flex-start;
+}
+
+/* ========== HEADLINE ========== */
+.screen-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.headline {
+  text-align: center;
+  margin-bottom: 24px;
+  max-width: 340px;
+}
+
+.headline h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.headline p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.38);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ========== PHONE ========== */
+.phone {
+  width: 375px;
+  height: 812px;
+  flex-shrink: 0;
+  background: #1C1C1E;
+  border-radius: 52px;
+  padding: 3px;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255,255,255,0.1),
+    0 50px 100px rgba(0,0,0,0.55),
+    0 0 0 0.5px rgba(0,0,0,0.4);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 49px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-app);
+}
+
+.island {
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 124px; height: 36px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 50;
+}
+
+.statusbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 30px 6px;
+  font-size: 15px;
+  font-weight: 600;
+  z-index: 40;
+}
+
+.statusbar-r { display: flex; gap: 5px; align-items: center; }
+
+/* ========== LIQUID GLASS TAB BAR ========== */
+.tab-bar {
+  position: absolute;
+  bottom: 16px; left: 14px; right: 14px;
+  height: 54px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border-radius: 27px;
+  border: 0.5px solid rgba(255,255,255,0.45);
+  box-shadow:
+    0 1px 20px rgba(0,0,0,0.05),
+    inset 0 0.5px 0 rgba(255,255,255,0.7),
+    inset 0 -0.5px 0 rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  z-index: 30;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 5px 14px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.tab-item.active::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255,255,255,0.55);
+  box-shadow: 0 0.5px 4px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.9);
+  z-index: -1;
+}
+
+.tab-item svg {
+  width: 20px; height: 20px;
+  stroke-width: 1.6;
+  color: var(--text-tertiary);
+}
+
+.tab-item.active svg { color: var(--green-deep); }
+
+.tab-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.tab-item.active .tab-label {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+/* ========== GLASS ELEMENTS ========== */
+.glass-icon-row {
+  position: absolute;
+  top: 58px; left: 20px; right: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 35;
+}
+
+.glass-icon {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 50%;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0.5px 6px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.7);
+}
+
+.glass-icon svg {
+  width: 16px; height: 16px;
+  color: var(--text-primary);
+  stroke-width: 1.8;
+}
+
+.nav-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 15px;
+  background: rgba(255,255,255,0.38);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0.5px 8px rgba(0,0,0,0.04), inset 0 0.5px 0 rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  margin-bottom: 14px;
+}
+
+.nav-glass svg { width: 15px; height: 15px; color: var(--green-dark); }
+
+.content {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 100px 20px 86px;
+  overflow: hidden;
+}
+
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.04);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.ico { fill: none; stroke: currentColor; }
+
+/* ========== SCREEN 1: MAP ========== */
+.map-fullscreen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.map-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 35%, rgba(183,228,199,0.6) 0%, transparent 40%),
+    radial-gradient(ellipse at 65% 25%, rgba(216,243,220,0.5) 0%, transparent 35%),
+    radial-gradient(ellipse at 45% 60%, rgba(180,220,190,0.4) 0%, transparent 40%),
+    radial-gradient(ellipse at 75% 70%, rgba(200,235,210,0.3) 0%, transparent 35%),
+    linear-gradient(170deg, #e8efe5 0%, #dde8d6 20%, #d5e1cd 40%, #cddbc4 60%, #c5d5bb 80%, #bccfb2 100%);
+}
+
+.map-elements {
+  position: absolute; inset: 0;
+}
+
+.map-overlay {
+  position: absolute; inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 20px 86px;
+  z-index: 10;
+}
+
+/* Map search bar */
+.map-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: 16px;
+  border: 0.5px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06), inset 0 0.5px 0 rgba(255,255,255,0.8);
+  margin-bottom: auto;
+}
+
+.map-search svg { width: 16px; height: 16px; color: var(--text-tertiary); flex-shrink: 0; }
+.map-search span { font-size: 14px; color: var(--text-tertiary); font-weight: 400; }
+
+/* Map zone cards */
+.map-zone-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: 18px;
+  border: 0.5px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  padding: 14px 16px;
+  margin-top: auto;
+}
+
+.zone-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+
+.zone-health-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.zone-health-dot.good { background: var(--green-light); box-shadow: 0 0 6px rgba(82,183,136,0.4); }
+.zone-health-dot.warn { background: var(--amber); box-shadow: 0 0 6px rgba(224,159,62,0.4); }
+
+.zone-name {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: -0.3px;
+  flex: 1;
+}
+
+.zone-arrow {
+  width: 20px; height: 20px;
+  color: var(--text-tertiary);
+}
+
+.zone-metrics {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+.zone-metric {
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 10px;
+  background: rgba(45,106,79,0.06);
+  border-radius: 10px;
+  font-size: 11px; font-weight: 600;
+  color: var(--green-dark);
+}
+
+.zone-metric svg { width: 12px; height: 12px; }
+
+.zone-metric.soil { background: rgba(139,111,71,0.08); color: var(--earth); }
+.zone-metric.climate { background: rgba(91,155,213,0.08); color: var(--sky); }
+
+/* ========== SCREEN 2: ZONE DETAIL ========== */
+.zone-hero {
+  width: 100%; height: 120px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.zone-hero-bg {
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(82,183,136,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 40%, rgba(46,196,182,0.3) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 80%, rgba(183,228,199,0.5) 0%, transparent 50%),
+    linear-gradient(145deg, #2D6A4F, #40916C, #52B788, #B7E4C7);
+}
+
+.zone-hero-label {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  display: flex; flex-direction: column; gap: 1px;
+}
+
+.zone-hero-label h3 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+}
+
+.zone-hero-label span {
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.8);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.stat-box {
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 14px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  padding: 10px;
+  text-align: center;
+}
+
+.stat-box .num {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1;
+}
+
+.stat-box .label {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.section-title {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+
+.condition-row {
+  display: flex; align-items: center;
+  gap: 8px; padding: 8px 0;
+}
+
+.condition-row + .condition-row { border-top: 0.5px solid rgba(0,0,0,0.04); }
+
+.cond-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.cond-icon svg { width: 14px; height: 14px; }
+
+.cond-icon.soil { background: rgba(139,111,71,0.1); color: var(--earth); }
+.cond-icon.temp { background: rgba(224,159,62,0.1); color: var(--amber); }
+.cond-icon.water { background: rgba(91,155,213,0.1); color: var(--sky); }
+
+.cond-info { flex: 1; }
+.cond-label { font-size: 12px; font-weight: 600; }
+.cond-value { font-size: 11px; color: var(--text-secondary); }
+
+.cond-status {
+  font-size: 10px; font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.cond-status.good { background: var(--green-wash); color: var(--green-dark); }
+.cond-status.mid { background: rgba(224,159,62,0.1); color: #A5710B; }
+
+/* ========== SCREEN 3: NETWORK ========== */
+.network-viz {
+  width: 100%; height: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+  background: linear-gradient(160deg, rgba(27,67,50,0.04), rgba(45,106,79,0.06), rgba(82,183,136,0.04));
+  border: 0.5px solid rgba(45,106,79,0.08);
+}
+
+.interaction-card {
+  display: flex; align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.interaction-card + .interaction-card { border-top: 0.5px solid rgba(0,0,0,0.05); }
+
+.inter-type {
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.inter-type.sym { background: var(--green-wash); color: var(--green-dark); }
+.inter-type.pred { background: rgba(231,111,81,0.1); color: var(--coral); }
+.inter-type.comp { background: rgba(224,159,62,0.1); color: #A5710B; }
+.inter-type.par { background: rgba(91,155,213,0.1); color: var(--sky); }
+
+.inter-text {
+  font-size: 12px; line-height: 1.4;
+  flex: 1;
+}
+
+.inter-text strong { font-weight: 600; }
+
+/* ========== SCREEN 4: SIGNALER ========== */
+.signal-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.signal-type {
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.signal-type-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.signal-type-icon svg { width: 20px; height: 20px; }
+
+.signal-type-icon.obs { background: rgba(45,106,79,0.1); color: var(--green-dark); }
+.signal-type-icon.alert { background: rgba(231,111,81,0.1); color: var(--coral); }
+.signal-type-icon.photo { background: rgba(46,196,182,0.1); color: var(--teal); }
+.signal-type-icon.evolve { background: rgba(224,159,62,0.1); color: var(--amber); }
+
+.signal-type-name {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.signal-type-desc {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  line-height: 1.35;
+}
+
+.recent-signals-title {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.signal-item {
+  display: flex; align-items: center;
+  gap: 10px; padding: 10px 0;
+}
+
+.signal-item + .signal-item { border-top: 0.5px solid rgba(0,0,0,0.05); }
+
+.signal-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  color: white; flex-shrink: 0;
+}
+
+.signal-avatar.a1 { background: var(--green-mid); }
+.signal-avatar.a2 { background: var(--teal); }
+.signal-avatar.a3 { background: var(--amber); }
+
+.signal-content { flex: 1; }
+.signal-name { font-size: 12px; font-weight: 600; }
+.signal-detail { font-size: 11px; color: var(--text-secondary); }
+.signal-time { font-size: 10px; color: var(--text-tertiary); flex-shrink: 0; }
+
+/* ========== SCREEN 5: IMPACT ========== */
+.impact-hero {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.impact-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px;
+  box-shadow: 0 4px 16px rgba(45,106,79,0.2);
+}
+
+.impact-avatar svg { width: 24px; height: 24px; color: white; }
+
+.impact-name {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.impact-role {
+  font-size: 11px; color: var(--green-mid);
+  font-weight: 600; font-style: italic;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.impact-stat {
+  background: var(--bg-card);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 14px;
+  border: 0.5px solid rgba(255,255,255,0.5);
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.impact-stat .num {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 24px; font-weight: 700;
+  line-height: 1;
+}
+
+.impact-stat .num.green { color: var(--green-dark); }
+.impact-stat .num.teal { color: var(--teal); }
+.impact-stat .num.amber { color: var(--amber); }
+.impact-stat .num.earth { color: var(--earth); }
+
+.impact-stat .label {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.badge-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.badge {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 11px; font-weight: 600;
+}
+
+.badge.b1 { background: var(--green-wash); color: var(--green-dark); }
+.badge.b2 { background: rgba(46,196,182,0.1); color: #1A8A80; }
+.badge.b3 { background: rgba(224,159,62,0.1); color: #A5710B; }
+
+.badge svg { width: 12px; height: 12px; }
+
+.contribution-bar-section { margin-bottom: 10px; }
+
+.contrib-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; margin-bottom: 4px;
+}
+
+.contrib-label span:first-child { font-weight: 600; color: var(--text-secondary); }
+.contrib-label span:last-child { font-weight: 700; color: var(--green-dark); }
+
+.contrib-track {
+  height: 7px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.contrib-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.contrib-fill.f1 { width: 82%; background: linear-gradient(90deg, var(--green-deep), var(--green-light)); }
+.contrib-fill.f2 { width: 65%; background: linear-gradient(90deg, var(--teal), #7EDDD5); }
+.contrib-fill.f3 { width: 45%; background: linear-gradient(90deg, var(--amber), #F0C97A); }
+
+/* ========== STATUS BAR TEMPLATE ========== */
+.sb-tpl { display: contents; }
+</style>
+</head>
+<body>
+
+<div class="showcase">
+
+<!-- ============================== SCREEN 1: CARTE VIVANTE ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Une cartographie<br>vivante de votre territoire</h2>
+    <p>Explorez les écosystèmes autour de vous en temps réel</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    </div>
+
+    <div class="map-fullscreen">
+      <div class="map-bg"></div>
+      <!-- Map SVG with zones, paths, markers -->
+      <div class="map-elements">
+        <svg viewBox="0 0 375 812" width="375" height="812" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+          <!-- Zone polygons -->
+          <path d="M40,180 Q90,140 160,160 Q200,175 220,220 Q240,270 200,300 Q150,320 90,290 Q50,260 40,220Z" fill="rgba(82,183,136,0.15)" stroke="rgba(82,183,136,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <path d="M180,130 Q250,100 310,140 Q350,170 340,230 Q330,280 280,300 Q230,310 200,270 Q180,240 180,200Z" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <path d="M60,350 Q130,320 200,340 Q260,355 280,400 Q290,450 250,480 Q190,510 120,490 Q70,470 50,420 Q40,380 60,350Z" fill="rgba(224,159,62,0.1)" stroke="rgba(224,159,62,0.2)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <path d="M220,380 Q290,350 340,390 Q370,420 350,470 Q330,510 280,520 Q240,510 220,470 Q210,430 220,380Z" fill="rgba(82,183,136,0.12)" stroke="rgba(82,183,136,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          
+          <!-- Connection lines between zones -->
+          <line x1="180" y1="230" x2="220" y2="240" stroke="rgba(45,106,79,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="200" y1="300" x2="180" y2="340" stroke="rgba(45,106,79,0.12)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="280" y1="300" x2="280" y2="380" stroke="rgba(45,106,79,0.12)" stroke-width="1" stroke-dasharray="3,3"/>
+
+          <!-- Paths/trails -->
+          <path d="M30,250 Q80,230 120,250 Q170,280 230,260 Q290,240 350,260" fill="none" stroke="rgba(139,111,71,0.2)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30,420 Q100,400 180,420 Q250,440 330,410" fill="none" stroke="rgba(139,111,71,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+          
+          <!-- Water -->
+          <path d="M10,500 Q80,480 150,510 Q220,540 300,515 Q350,500 380,520" fill="none" stroke="rgba(91,155,213,0.3)" stroke-width="3" stroke-linecap="round"/>
+          
+          <!-- Species markers -->
+          <g>
+            <circle cx="100" cy="220" r="8" fill="var(--green-light)" opacity="0.9"/><circle cx="100" cy="220" r="12" fill="none" stroke="var(--green-light)" stroke-width="1" opacity="0.4"/>
+            <circle cx="160" cy="200" r="6" fill="var(--green-mid)" opacity="0.85"/>
+            <circle cx="130" cy="260" r="5" fill="var(--green-dark)" opacity="0.8"/>
+            
+            <circle cx="260" cy="180" r="7" fill="var(--teal)" opacity="0.9"/><circle cx="260" cy="180" r="11" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.4"/>
+            <circle cx="300" cy="210" r="5" fill="var(--teal)" opacity="0.8"/>
+            <circle cx="240" cy="230" r="4" fill="var(--green-mid)" opacity="0.75"/>
+            
+            <circle cx="150" cy="400" r="7" fill="var(--amber)" opacity="0.85"/><circle cx="150" cy="400" r="11" fill="none" stroke="var(--amber)" stroke-width="1" opacity="0.35"/>
+            <circle cx="200" cy="430" r="5" fill="var(--amber)" opacity="0.75"/>
+            <circle cx="110" cy="440" r="4" fill="var(--coral)" opacity="0.7"/>
+            
+            <circle cx="290" cy="430" r="6" fill="var(--green-light)" opacity="0.85"/>
+            <circle cx="310" cy="460" r="4" fill="var(--green-mid)" opacity="0.75"/>
+          </g>
+          
+          <!-- User location pulse -->
+          <circle cx="190" cy="310" r="20" fill="rgba(45,106,79,0.06)"/>
+          <circle cx="190" cy="310" r="12" fill="rgba(45,106,79,0.1)"/>
+          <circle cx="190" cy="310" r="6" fill="var(--green-dark)"/>
+          <circle cx="190" cy="310" r="3" fill="white"/>
+        </svg>
+      </div>
+
+      <div class="map-overlay">
+        <div class="map-search">
+          <svg class="ico" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Rechercher une zone…</span>
+        </div>
+
+        <div class="map-zone-card">
+          <div class="zone-header">
+            <div class="zone-health-dot good"></div>
+            <div class="zone-name">Forêt de Saint-Germain</div>
+            <svg class="ico zone-arrow" viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="zone-metrics">
+            <div class="zone-metric"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/></svg> 142 espèces</div>
+            <div class="zone-metric soil"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M2 22h20M6 18v-4M10 18v-6M14 18v-8M18 18v-2"/></svg> Sol acide</div>
+            <div class="zone-metric climate"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-3-3.87M9 21v-2a4 4 0 0 1 3-3.87M12 3v6"/><circle cx="12" cy="12" r="3"/></svg> 18 °C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="tab-label">Carte</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M12 19l-7-7 7-7M19 12H5"/></svg><span class="tab-label">Signaler</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">Impact</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 2: ZONE DETAIL ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Sol, climat, biodiversité :<br>tout est lié</h2>
+    <p>Chaque zone révèle ses conditions et ses espèces</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg> Zone détail</div>
+      
+      <div class="zone-hero">
+        <div class="zone-hero-bg"></div>
+        <div class="zone-hero-label">
+          <h3>Forêt de Saint-Germain</h3>
+          <span>Yvelines · Île-de-France</span>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box"><div class="num">142</div><div class="label">Espèces</div></div>
+        <div class="stat-box"><div class="num">38</div><div class="label">Observations</div></div>
+        <div class="stat-box"><div class="num">87%</div><div class="label">Santé</div></div>
+      </div>
+
+      <div class="section-title">Conditions du milieu</div>
+      <div class="card" style="padding: 6px 14px;">
+        <div class="condition-row">
+          <div class="cond-icon soil"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M2 22h20M6 18v-4M10 18v-6M14 18v-8M18 18v-2"/></svg></div>
+          <div class="cond-info"><div class="cond-label">Sol</div><div class="cond-value">Acide · pH 5.2 · Argileux</div></div>
+          <span class="cond-status good">Stable</span>
+        </div>
+        <div class="condition-row">
+          <div class="cond-icon temp"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"/></svg></div>
+          <div class="cond-info"><div class="cond-label">Température sol</div><div class="cond-value">16.4 °C · +1.2° / mois</div></div>
+          <span class="cond-status mid">En hausse</span>
+        </div>
+        <div class="condition-row">
+          <div class="cond-icon water"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+          <div class="cond-info"><div class="cond-label">Humidité</div><div class="cond-value">72 % · Bonne rétention</div></div>
+          <span class="cond-status good">Optimal</span>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="tab-label">Carte</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="tab-label">Signaler</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">Impact</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 3: RÉSEAU ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Chaque espèce<br>est un maillon du réseau</h2>
+    <p>Visualisez les interactions biologiques en un coup d'œil</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="7" y2="7"/><line x1="12" y1="14" x2="17" y2="17"/></svg> Réseau d'interactions</div>
+      
+      <div class="network-viz">
+        <svg viewBox="0 0 335 260" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- Connection lines -->
+          <line x1="168" y1="90" x2="80" y2="50" stroke="rgba(82,183,136,0.3)" stroke-width="1.5"/>
+          <line x1="168" y1="90" x2="260" y2="55" stroke="rgba(82,183,136,0.3)" stroke-width="1.5"/>
+          <line x1="168" y1="90" x2="60" y2="140" stroke="rgba(46,196,182,0.3)" stroke-width="1.5"/>
+          <line x1="168" y1="90" x2="280" y2="140" stroke="rgba(224,159,62,0.3)" stroke-width="1.5"/>
+          <line x1="168" y1="90" x2="110" y2="200" stroke="rgba(231,111,81,0.25)" stroke-width="1"/>
+          <line x1="168" y1="90" x2="230" y2="210" stroke="rgba(139,111,71,0.25)" stroke-width="1"/>
+          <line x1="80" y1="50" x2="60" y2="140" stroke="rgba(45,106,79,0.12)" stroke-width="1"/>
+          <line x1="260" y1="55" x2="280" y2="140" stroke="rgba(45,106,79,0.12)" stroke-width="1"/>
+          <line x1="60" y1="140" x2="110" y2="200" stroke="rgba(45,106,79,0.1)" stroke-width="1"/>
+          <line x1="280" y1="140" x2="230" y2="210" stroke="rgba(45,106,79,0.1)" stroke-width="1"/>
+          
+          <!-- Nodes -->
+          <!-- Central: Chêne -->
+          <circle cx="168" cy="90" r="22" fill="rgba(45,106,79,0.12)" stroke="rgba(45,106,79,0.2)" stroke-width="1"/>
+          <circle cx="168" cy="90" r="15" fill="var(--green-dark)"/>
+          <text x="168" y="93" text-anchor="middle" fill="white" font-size="7" font-weight="600">Chêne</text>
+          
+          <!-- Mycorrhize -->
+          <circle cx="80" cy="50" r="12" fill="var(--green-mid)" opacity="0.9"/>
+          <text x="80" y="53" text-anchor="middle" fill="white" font-size="5.5" font-weight="600">Myco.</text>
+          
+          <!-- Geai -->
+          <circle cx="260" cy="55" r="11" fill="var(--teal)" opacity="0.9"/>
+          <text x="260" y="58" text-anchor="middle" fill="white" font-size="5.5" font-weight="600">Geai</text>
+          
+          <!-- Mousse -->
+          <circle cx="60" cy="140" r="9" fill="var(--green-light)" opacity="0.85"/>
+          <text x="60" y="143" text-anchor="middle" fill="white" font-size="5" font-weight="600">Mousse</text>
+          
+          <!-- Gui -->
+          <circle cx="280" cy="140" r="10" fill="var(--amber)" opacity="0.85"/>
+          <text x="280" y="143" text-anchor="middle" fill="white" font-size="5" font-weight="600">Gui</text>
+          
+          <!-- Chenille -->
+          <circle cx="110" cy="200" r="8" fill="var(--coral)" opacity="0.8"/>
+          <text x="110" y="203" text-anchor="middle" fill="white" font-size="4.5" font-weight="600">Chen.</text>
+          
+          <!-- Vers -->
+          <circle cx="230" cy="210" r="8" fill="var(--earth)" opacity="0.8"/>
+          <text x="230" y="213" text-anchor="middle" fill="white" font-size="4.5" font-weight="600">Vers</text>
+
+          <!-- Legend -->
+          <g transform="translate(20, 238)">
+            <circle cx="0" cy="0" r="3" fill="var(--green-mid)"/><text x="8" y="3" font-size="7" fill="var(--text-tertiary)">Symbiose</text>
+            <circle cx="70" cy="0" r="3" fill="var(--amber)"/><text x="78" y="3" font-size="7" fill="var(--text-tertiary)">Parasitisme</text>
+            <circle cx="155" cy="0" r="3" fill="var(--coral)"/><text x="163" y="3" font-size="7" fill="var(--text-tertiary)">Prédation</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="section-title">Relations clés</div>
+      <div class="card" style="padding: 6px 14px;">
+        <div class="interaction-card">
+          <span class="inter-type sym">Symbiose</span>
+          <div class="inter-text"><strong>Chêne</strong> ↔ <strong>Mycorrhize</strong> · Échange nutriments</div>
+        </div>
+        <div class="interaction-card">
+          <span class="inter-type par">Parasit.</span>
+          <div class="inter-text"><strong>Gui</strong> → <strong>Chêne</strong> · Prélève la sève</div>
+        </div>
+        <div class="interaction-card">
+          <span class="inter-type pred">Prédat.</span>
+          <div class="inter-text"><strong>Chenille</strong> → <strong>Chêne</strong> · Consomme les feuilles</div>
+        </div>
+        <div class="interaction-card">
+          <span class="inter-type comp">Dispers.</span>
+          <div class="inter-text"><strong>Geai</strong> → <strong>Chêne</strong> · Disperse les glands</div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="tab-label">Carte</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="tab-label">Signaler</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">Impact</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 4: SIGNALER ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Signalez, observez,<br>contribuez</h2>
+    <p>Chaque observation enrichit la mémoire collective</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Signaler</div>
+      
+      <div class="signal-type-grid">
+        <div class="signal-type">
+          <div class="signal-type-icon obs"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div class="signal-type-name">Observer</div>
+          <div class="signal-type-desc">Signaler une espèce et son état</div>
+        </div>
+        <div class="signal-type">
+          <div class="signal-type-icon alert"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="signal-type-name">Alerter</div>
+          <div class="signal-type-desc">Espèce invasive ou dégradation</div>
+        </div>
+        <div class="signal-type">
+          <div class="signal-type-icon photo"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <div class="signal-type-name">Photographier</div>
+          <div class="signal-type-desc">Documenter l'évolution du milieu</div>
+        </div>
+        <div class="signal-type">
+          <div class="signal-type-icon evolve"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="signal-type-name">Suivre</div>
+          <div class="signal-type-desc">Mesurer les changements du milieu</div>
+        </div>
+      </div>
+
+      <div class="recent-signals-title">Signalements récents</div>
+      <div class="card" style="padding: 6px 14px;">
+        <div class="signal-item">
+          <div class="signal-avatar a1">ML</div>
+          <div class="signal-content"><div class="signal-name">Marie L.</div><div class="signal-detail">Renouée du Japon · Berge ouest</div></div>
+          <div class="signal-time">2h</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-avatar a2">TC</div>
+          <div class="signal-content"><div class="signal-name">Thomas C.</div><div class="signal-detail">Pic épeiche nicheur · Zone nord</div></div>
+          <div class="signal-time">5h</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-avatar a3">AB</div>
+          <div class="signal-content"><div class="signal-name">Aïcha B.</div><div class="signal-detail">Érosion sentier · Chemin du ru</div></div>
+          <div class="signal-time">1j</div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="tab-label">Carte</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="tab-label">Signaler</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">Impact</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ============================== SCREEN 5: IMPACT ============================== -->
+<div class="screen-wrap">
+  <div class="headline">
+    <h2>Devenez acteur<br>de votre territoire</h2>
+    <p>Mesurez votre impact sur la biodiversité locale</p>
+  </div>
+  <div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+    <div class="statusbar"><span>9:41</span><div class="statusbar-r"><svg width="16" height="11" fill="none" viewBox="0 0 16 11"><rect x="0" y="5.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="4" y="3.5" width="2.5" height="7.5" rx=".8" fill="currentColor"/><rect x="8" y="1.5" width="2.5" height="9.5" rx=".8" fill="currentColor"/><rect x="12" y="0" width="2.5" height="11" rx=".8" fill="currentColor"/></svg><svg width="24" height="11" fill="none" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="2.5" stroke="currentColor" stroke-width=".8"/><rect x="21" y="3" width="2" height="5" rx="1" fill="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.5" fill="currentColor"/></svg></div></div>
+    <div class="glass-icon-row">
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+      <div class="glass-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+    </div>
+    <div class="content">
+      <div class="nav-glass"><svg class="ico" viewBox="0 0 24 24" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Mon impact</div>
+      
+      <div class="impact-hero">
+        <div class="impact-avatar"><svg class="ico" viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/><path d="M12 13V8"/><path d="M9 10.5L12 8l3 2.5"/></svg></div>
+        <div class="impact-name">Éco-explorateur</div>
+        <div class="impact-role">Membre depuis mars 2026</div>
+      </div>
+
+      <div class="impact-stats">
+        <div class="impact-stat"><div class="num green">47</div><div class="label">Observations</div></div>
+        <div class="impact-stat"><div class="num teal">12</div><div class="label">Signalements</div></div>
+        <div class="impact-stat"><div class="num amber">8</div><div class="label">Zones suivies</div></div>
+        <div class="impact-stat"><div class="num earth">3</div><div class="label">Actions terrain</div></div>
+      </div>
+
+      <div class="section-title">Badges obtenus</div>
+      <div class="badge-row">
+        <div class="badge b1"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/></svg> Sentinelle</div>
+        <div class="badge b2"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg> Observateur</div>
+        <div class="badge b3"><svg class="ico" viewBox="0 0 24 24" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/></svg> Photographe</div>
+      </div>
+
+      <div class="section-title">Contributions</div>
+      <div class="card" style="padding: 12px 14px;">
+        <div class="contribution-bar-section">
+          <div class="contrib-label"><span>Espèces documentées</span><span>82 %</span></div>
+          <div class="contrib-track"><div class="contrib-fill f1"></div></div>
+        </div>
+        <div class="contribution-bar-section">
+          <div class="contrib-label"><span>Suivi de zones</span><span>65 %</span></div>
+          <div class="contrib-track"><div class="contrib-fill f2"></div></div>
+        </div>
+        <div class="contribution-bar-section" style="margin-bottom:0;">
+          <div class="contrib-label"><span>Actions préservation</span><span>45 %</span></div>
+          <div class="contrib-track"><div class="contrib-fill f3"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="tab-label">Carte</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="10" x2="6" y2="8"/><line x1="12" y1="10" x2="18" y2="8"/><line x1="12" y1="14" x2="6" y2="16"/><line x1="12" y1="14" x2="18" y2="16"/></svg><span class="tab-label">Réseau</span></div>
+      <div class="tab-item"><svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="tab-label">Signaler</span></div>
+      <div class="tab-item active"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">Impact</span></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
